@@ -9,6 +9,7 @@ on:
       - 'fonts/**'
       - 'downloads/**'
       - 'previews/**'
+      - 'legal/**'
       - 'CNAME'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
