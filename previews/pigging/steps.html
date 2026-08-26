@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.container {
+  width: 900px;
+  height: 440px;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0;
+  overflow: hidden;
+  box-shadow: 3px 5px 9px #ccc;
+}
+.steps {
+  width: 260px;
+  height: 440px;
+  display: inline-block;
+  background-color: #eee;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding-top: 100px;
+  font-family: Verdana, sans-serif;
+  font-size: 14px;
+}
+.step {
+  display: none;
+}
+.label-text {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  position: relative;
+  left: 0;
+  cursor: pointer;
+}
+.label-text:hover {
+  background-color: #ccc;
+}
+.step:checked + .label-text  {
+  background-color: #238AE6;
+  color: white;
+  left: 12px;
+  font-weight: bold;
+}
+.label-text {
+  transition: all 0.4s;
+}
+.animation {
+  display: inline-block;
+  width: 640px;
+  height: 440px;
+  vertical-align: top;
+}
+</style>
+<script>
+var animations = [];
+function handleChange(rb, i) {
+  if (rb.checked) {
+    document.getElementById("animation").src = animations[i].src;
+  }
+}
+</script>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Daniel Miller</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">20000.0000000000</mso:Order>
+<mso:ContentTypeId msdt:dt="string">0x0101</mso:ContentTypeId>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+<div class="container">
+<div class="steps">
+  <label><input name="step" class="step" type="radio" onchange='handleChange(this,1);' checked="checked" /><span class="label-text">Step 1: Prepare Pig trap</span></label>
+  <label><input name="step" class="step" type="radio" onchange='handleChange(this,2);' /><span class="label-text">Step 2: Purge Pig trap</span></label>
+  <label><input name="step" class="step" type="radio" onchange='handleChange(this,3);' /><span class="label-text">Step 3: Depressure Pig trap</span></label>
+  <label><input name="step" class="step" type="radio" onchange='handleChange(this,4);' /><span class="label-text">Step 4: Install Pig in trap</span></label>
+  <label><input name="step" class="step" type="radio" onchange='handleChange(this,5);' /><span class="label-text">Step 5: Launch Pig</span></label>
+  <label><input name="step" class="step" type="radio" onchange='handleChange(this,6);' /><span class="label-text">Step 6: Bypass Pig trap</span></label>
+</div>
+<img id="animation" class=".animation" src="/img/animations/gif/pigging/step1.gif" />
+</div>
+<script>
+//Preload images
+for (var i=1; i<=6; i++) {
+  animations[i] = new Image();
+  animations[i].src = "/img/animations/gif/pigging/step" + i + ".gif";
+}
+</script>
+</body>
+</html>
