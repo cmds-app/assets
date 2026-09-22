@@ -14,6 +14,9 @@
   const VIEWER_HEIGHT = 0.92;
   const VIEWER_MAX_ZOOM = 2;
 
+  // Notes show one sentence per paragraph. Browsers without a sentence splitter break after . ? or ! and a space.
+  const sentenceSplitter = "Segmenter" in Intl ? new Intl.Segmenter("en-CA", { granularity: "sentence" }) : null;
+
   let current = 0;
   let hideTimer = 0;
   let enlarged = null;
@@ -36,10 +39,30 @@
 
     counter.textContent = `${current + 1} / ${slides.length}`;
 
-    const aside = slides[current].querySelector("aside");
-    notes.textContent = aside ? aside.textContent.trim() : "";
+    renderNotes(slides[current]);
 
     history.replaceState(null, "", `#${current + 1}`);
+  }
+
+  function splitSentences(text) {
+    if (sentenceSplitter) {
+      return Array.from(sentenceSplitter.segment(text), (part) => part.segment.trim()).filter(Boolean);
+    }
+    return text.split(/(?<=[.?!])\s+/).filter(Boolean);
+  }
+
+  // The source wraps notes to suit the editor, so line breaks and indents are collapsed before splitting.
+  function renderNotes(slide) {
+    const aside = slide.querySelector("aside");
+    const text = aside ? aside.textContent.replace(/\s+/g, " ").trim() : "";
+
+    const paragraphs = splitSentences(text).map((sentence) => {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = sentence;
+      return paragraph;
+    });
+
+    notes.replaceChildren(...paragraphs);
   }
 
   function toggleNotes() {

@@ -75,13 +75,20 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  max-height: 40vh;
+  max-height: 50vh;
   overflow: auto;
   padding: 20px 32px 72px;
   background: rgba(15, 26, 36, 0.94);
   color: #e3eaf0;
   font: 20px/1.5 Carlito, Arial, sans-serif;
-  white-space: pre-wrap;
+}
+
+#notes p {
+  margin: 0 0 0.5em;
+}
+
+#notes p:last-child {
+  margin-bottom: 0;
 }
 
 /* A clicked screenshot, enlarged to fill the window. */
