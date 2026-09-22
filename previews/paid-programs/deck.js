@@ -6,9 +6,17 @@
   const slides = Array.from(stage.querySelectorAll(".slide"));
   const notes = document.getElementById("notes");
   const counter = document.getElementById("counter");
+  const viewer = document.getElementById("viewer");
+  const viewerImage = viewer.querySelector("img");
+
+  // Enlarged screenshots fill up to this share of the window, and never grow past twice their captured size.
+  const VIEWER_WIDTH = 0.96;
+  const VIEWER_HEIGHT = 0.92;
+  const VIEWER_MAX_ZOOM = 2;
 
   let current = 0;
   let hideTimer = 0;
+  let enlarged = null;
 
   function fit() {
     const scale = Math.min(window.innerWidth / WIDTH, window.innerHeight / HEIGHT);
@@ -47,6 +55,29 @@
     }
   }
 
+  function fitViewer() {
+    const zoom = Math.min(
+      (window.innerWidth * VIEWER_WIDTH) / enlarged.naturalWidth,
+      (window.innerHeight * VIEWER_HEIGHT) / enlarged.naturalHeight,
+      VIEWER_MAX_ZOOM
+    );
+    viewerImage.style.width = `${Math.round(enlarged.naturalWidth * zoom)}px`;
+    viewerImage.style.height = `${Math.round(enlarged.naturalHeight * zoom)}px`;
+  }
+
+  function openViewer(image) {
+    enlarged = image;
+    viewerImage.src = image.currentSrc || image.src;
+    viewerImage.alt = image.alt;
+    fitViewer();
+    viewer.hidden = false;
+  }
+
+  function closeViewer() {
+    viewer.hidden = true;
+    enlarged = null;
+  }
+
   // The controls appear while the mouse moves and fade after a few seconds.
   function revealControls() {
     document.body.classList.add("show-controls");
@@ -56,6 +87,13 @@
 
   document.addEventListener("keydown", (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
+
+    // With a screenshot enlarged, any key (a clicker included) closes it rather than changing slides behind it.
+    if (enlarged) {
+      closeViewer();
+      event.preventDefault();
+      return;
+    }
 
     switch (event.key) {
       case "ArrowRight":
@@ -97,8 +135,17 @@
   document.getElementById("toggle-notes").addEventListener("click", toggleNotes);
   document.getElementById("toggle-full").addEventListener("click", toggleFullScreen);
 
+  stage.addEventListener("click", (event) => {
+    const image = event.target.closest(".slide img");
+    if (image) openViewer(image);
+  });
+  viewer.addEventListener("click", closeViewer);
+
   document.addEventListener("mousemove", revealControls);
-  window.addEventListener("resize", fit);
+  window.addEventListener("resize", () => {
+    fit();
+    if (enlarged) fitViewer();
+  });
   window.addEventListener("hashchange", () => show(indexFromHash()));
 
   fit();
