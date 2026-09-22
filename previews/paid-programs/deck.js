@@ -14,7 +14,8 @@
   const VIEWER_HEIGHT = 0.92;
   const VIEWER_MAX_ZOOM = 2;
 
-  // Notes show one sentence per paragraph. Browsers without a sentence splitter break after . ? or ! and a space.
+  // Notes show one sentence per paragraph, except that a question keeps the sentences that answer it, up to the
+  // next question, in its own paragraph. Browsers without a sentence splitter break after . ? or ! and a space.
   const sentenceSplitter = "Segmenter" in Intl ? new Intl.Segmenter("en-CA", { granularity: "sentence" }) : null;
 
   let current = 0;
@@ -56,13 +57,42 @@
     const aside = slide.querySelector("aside");
     const text = aside ? aside.textContent.replace(/\s+/g, " ").trim() : "";
 
-    const paragraphs = splitSentences(text).map((sentence) => {
-      const paragraph = document.createElement("p");
-      paragraph.textContent = sentence;
-      return paragraph;
-    });
+    notes.replaceChildren(...groupAnswers(splitSentences(text)).map(renderParagraph));
+  }
 
-    notes.replaceChildren(...paragraphs);
+  // Each group is a question (or null) and the sentences that follow it.
+  function groupAnswers(sentences) {
+    const groups = [];
+    let question = null;
+
+    for (const sentence of sentences) {
+      const isQuestion = sentence.endsWith("?");
+      if (isQuestion) {
+        question = { question: sentence, answer: [] };
+        groups.push(question);
+      } else if (question) {
+        question.answer.push(sentence);
+      } else {
+        groups.push({ question: null, answer: [sentence] });
+      }
+    }
+
+    return groups;
+  }
+
+  function renderParagraph(group) {
+    const paragraph = document.createElement("p");
+
+    if (group.question) {
+      const bold = document.createElement("b");
+      bold.textContent = group.question;
+      paragraph.append(bold);
+    }
+
+    const answer = group.answer.join(" ");
+    paragraph.append(group.question && answer ? ` ${answer}` : answer);
+
+    return paragraph;
   }
 
   function toggleNotes() {
