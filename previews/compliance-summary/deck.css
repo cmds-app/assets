@@ -1,0 +1,182 @@
+@font-face {
+  font-family: "Carlito";
+  font-weight: 400;
+  font-display: block;
+  src: url("../../fonts/carlito/carlito-400-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Carlito";
+  font-weight: 700;
+  font-display: block;
+  src: url("../../fonts/carlito/carlito-700-latin.woff2") format("woff2");
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0f1a24;
+}
+
+/* A fixed 1920 x 1080 canvas; deck.js scales it to fit the window. */
+#stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform: translate(-50%, -50%);
+}
+
+/* Base rules the slide markup assumes: no margins, border-box sizing,
+   and a div with no display of its own lays out as a flex column. */
+.slide,
+.slide * {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: Carlito, Arial, sans-serif;
+  color: #1c3144;
+  animation: fade-in 0.25s ease-out;
+}
+
+.slide:not(.active) {
+  display: none !important;
+}
+
+.slide div:not([style*="display"]) {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide h1 { font-size: 96px; font-weight: 600; line-height: 1.1; }
+.slide h2 { font-size: 64px; font-weight: 600; line-height: 1.15; }
+.slide h3 { font-size: 44px; font-weight: 600; line-height: 1.2; }
+.slide p { font-size: 32px; font-weight: 400; line-height: 1.4; }
+.slide img { display: block; cursor: zoom-in; }
+.slide aside { display: none; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#notes {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 50vh;
+  overflow: auto;
+  padding: 20px 32px 72px;
+  background: rgba(15, 26, 36, 0.94);
+  color: #e3eaf0;
+  font: 20px/1.5 Carlito, Arial, sans-serif;
+}
+
+#notes p {
+  margin: 0 0 0.5em;
+}
+
+#notes p:last-child {
+  margin-bottom: 0;
+}
+
+/* A clicked screenshot, enlarged to fill the window. */
+#viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 14, 20, 0.92);
+  cursor: zoom-out;
+  animation: fade-in 0.2s ease-out;
+}
+
+#viewer[hidden] {
+  display: none;
+}
+
+#viewer img {
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+#toolbar {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 16px Carlito, Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+body.show-controls #toolbar,
+#toolbar:focus-within {
+  opacity: 1;
+}
+
+#toolbar button {
+  padding: 6px 12px;
+  border: 1px solid #3a4f63;
+  border-radius: 6px;
+  background: #1c3144;
+  color: #f4f7f9;
+  font: inherit;
+  cursor: pointer;
+}
+
+#counter {
+  min-width: 4.5em;
+  color: #c9d6e0;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Print or save as PDF: one slide per page. */
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+
+  html,
+  body {
+    height: auto;
+    overflow: visible;
+    background: none;
+  }
+
+  #stage {
+    position: static;
+    transform: none !important;
+  }
+
+  .slide,
+  .slide:not(.active) {
+    position: relative;
+    display: flex !important;
+    width: 1920px;
+    height: 1080px;
+    break-after: page;
+    animation: none;
+  }
+
+  #notes,
+  #viewer,
+  #toolbar {
+    display: none !important;
+  }
+}

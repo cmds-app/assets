@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compliance reporting in CMDS</title>
+  <link rel="preload" href="../../fonts/carlito/carlito-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../fonts/carlito/carlito-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="deck.css">
+</head>
+
+<body>
+  <main id="stage">
+    <section class="slide" id="cover" data-transition="fade"
+      style="display:flex; flex-direction:column; gap:32px; justify-content:center; padding:128px; background:#1c3144">
+      <p
+        style="font-family:Carlito, Arial, sans-serif; font-size:28px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#8fd3cc">
+        Release 26.5 · October 8</p>
+      <h1
+        style="font-family:Carlito, Arial, sans-serif; font-size:120px; font-weight:700; line-height:1.05; color:#f4f7f9">
+        Compliance reporting in CMDS</h1>
+      <div style="width:160px; height:10px; display:flex; flex-direction:column; background:#e8883a; border-radius:2px">
+      </div>
+      <p style="font-family:Carlito, Arial, sans-serif; font-size:44px; line-height:1.3; color:#c9d6e0">The compliance
+        summary now shows live data, and a new report shows the trend over time</p>
+      <p
+        style="position:absolute; bottom:64px; left:128px; width:1664px; font-family:Carlito, Arial, sans-serif; font-size:24px; color:#9fb2c2">
+        CMDS End Users Meeting · Sep 24, 2026</p>
+      <aside>Over the next five minutes I'll walk you through the changes to compliance reporting in CMDS. There are two
+        parts to this. The Compliance Summary report now runs on live data, and a new Compliance Trend report shows how
+        compliance has changed month by month. Both are available in our test environment now, and they'll be in the
+        live environment on October 8. I'll leave some time for questions at the end.</aside>
+    </section>
+    <section class="slide" id="why" data-transition="fade"
+      style="display:flex; flex-direction:column; gap:40px; padding:88px 128px 96px; background:#fefefd">
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <p
+          style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0b6e6a">
+          Motivation</p>
+        <h2
+          style="font-family:Carlito, Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.1; color:#1c3144">
+          The compliance summary report is now up-to-the-minute</h2>
+        <div
+          style="width:128px; height:8px; display:flex; flex-direction:column; background:#e8883a; border-radius:2px">
+        </div>
+      </div>
+      <div
+        style="display:flex; flex-direction:column; gap:12px; padding:32px 48px; background:#1c3144; border-radius:16px">
+        <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; font-weight:700; color:#f4f7f9">A popular
+          request</p>
+        <p style="font-family:Carlito, Arial, sans-serif; font-size:34px; line-height:1.35; color:#e3eaf0">Many
+          administrators
+          asked for live compliance results. On a typical day, CMDS records more than 1000 competency status changes
+          and more than 600 achievement changes. Waiting until the next day to see that is not ideal.</p>
+      </div>
+      <div style="display:flex; flex-direction:row; gap:48px">
+        <div
+          style="display:flex; flex-direction:column; gap:14px; flex:1; padding:36px 44px; background:#f2f2f2; border:2px solid #3a4550; border-radius:16px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#56616b">
+            Today</p>
+          <h3
+            style="font-family:Carlito, Arial, sans-serif; font-size:40px; font-weight:700; line-height:1.2; color:#1c3144">
+            A nightly snapshot</h3>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:32px; line-height:1.4; color:#2e3d4c">The report
+            reads a snapshot taken overnight. Depending on the time of day you run the report, the results are up to a
+            day old.</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:14px; flex:1; padding:36px 44px; background:#ddf1ee; border-radius:16px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#0b6e6a">
+            In the next version (October 8)</p>
+          <h3
+            style="font-family:Carlito, Arial, sans-serif; font-size:40px; font-weight:700; line-height:1.2; color:#1c3144">
+            Calculated live</h3>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:32px; line-height:1.4; color:#2e3d4c">The report
+            is
+            calculated from current data whenever you run the report. A competency status change made a minute ago is
+            already in the
+            numbers.</p>
+        </div>
+      </div>
+      <div style="flex:1"></div>
+      <p
+        style="font-family:Carlito, Arial, sans-serif; font-size:32px; font-weight:700; line-height:1.3; text-align:center; color:#1c3144">
+        Result: the compliance score you see is the compliance score right now.</p>
+      <aside>Until now, the Compliance Summary report hasn't read live data. It read from a snapshot that CMDS took
+        every night. This means the report could be up to a day behind. On a typical day CMDS records more than 1000
+        competency status changes and more than 600 achievement changes, so everything in a busy day's work might not be
+        available in the report until the next morning.
+        Administrators asked us for numbers they could act on right away, so in this release the
+        report is calculated from live data every time you run it. If someone validates a competency a minute before you
+        run the report, it's in the results.</aside>
+    </section>
+    <section class="slide" id="summary" data-transition="fade"
+      style="display:flex; flex-direction:column; gap:40px; padding:88px 128px 96px; background:#fefefd">
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <p
+          style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0b6e6a">
+          Compliance Summary</p>
+        <h2
+          style="font-family:Carlito, Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.1; color:#1c3144">
+          The same report, live and faster</h2>
+        <div
+          style="width:128px; height:8px; display:flex; flex-direction:column; background:#e8883a; border-radius:2px">
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:row; gap:32px; flex:1">
+        <div style="display:flex; flex-direction:column; gap:12px; flex:0 0 1000px">
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; line-height:1.3; color:#1c3144"><span
+              style="color:#0b6e6a"><b>1</b></span>&nbsp;&nbsp;Simpler criteria: no report type, no dates, no refresh
+            banner</p>
+          <div
+            style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; padding:16px; background:#eef2f4; border-radius:12px">
+            <img src="img/summary-criteria.png"
+              alt="Compliance Summary criteria with two departments selected, department employment membership, all achievement types, the display options, and the three profile options, with no report type or date fields"
+              style="width:713px; height:440px; border:1px solid #d5dde2; border-radius:8px; object-fit:contain; box-shadow:0 4px 12px #1c31441a">
+          </div>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; justify-content:center; gap:28px; flex:1; padding:36px; background:#1c3144; border-radius:16px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#8fd3cc">
+            Orientation department</p>
+          <div style="display:flex; flex-direction:column; gap:4px">
+            <p
+              style="font-family:Carlito, Arial, sans-serif; font-size:30px; font-weight:700; line-height:1.2; color:#f4f7f9">
+              Before</p>
+            <p style="font-family:Carlito, Arial, sans-serif; font-size:26px; line-height:1.35; color:#c9d6e0">11 to 16
+              seconds per run</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px">
+            <p
+              style="font-family:Carlito, Arial, sans-serif; font-size:30px; font-weight:700; line-height:1.2; color:#f4f7f9">
+              After</p>
+            <p style="font-family:Carlito, Arial, sans-serif; font-size:26px; line-height:1.35; color:#c9d6e0">Under 2
+              seconds, on live data</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:row; gap:24px">
+        <div
+          style="display:flex; flex-direction:column; gap:6px; flex:1; padding:20px 24px; background:#ddf1ee; border-radius:12px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:26px; font-weight:700; line-height:1.2; color:#1c3144">
+            Same criteria</p>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:24px; line-height:1.35; color:#2e3d4c">
+            Departments,
+            membership, achievement types and profiles work as before</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:6px; flex:1; padding:20px 24px; background:#f1f4f5; border-radius:12px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:26px; font-weight:700; line-height:1.2; color:#1c3144">
+            Counts that match</p>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:24px; line-height:1.35; color:#2e3d4c">The number
+            on
+            each department is now the number of people in the report</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:6px; flex:1; padding:20px 24px; background:#ddf1ee; border-radius:12px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:26px; font-weight:700; line-height:1.2; color:#1c3144">
+            Current compliance only</p>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:24px; line-height:1.35; color:#2e3d4c">The two
+            history options move to the new Compliance Trend report</p>
+        </div>
+      </div>
+      <aside>Here's the Compliance Summary report itself. If you use it today, very little changes on the screen. The
+        criteria are the same: departments, membership, achievement types, and profiles. What's gone is the Report Type
+        choice, the date range that went with it, and the banner telling you when the data was last refreshed, because
+        there's no longer anything to refresh. It's also a lot faster. For the Orientation department at Keyera, which
+        has about 1,700 people, the report used to take about 15 seconds on average. Now we have it running in less than
+        3 seconds, and
+        that's while calculating everything live. The two history options, current and past compliance, and the
+        past three months, have moved to a new report of their own, which is next.</aside>
+    </section>
+    <section class="slide" id="trend" data-transition="fade"
+      style="display:flex; flex-direction:column; gap:40px; padding:88px 128px 96px; background:#fefefd">
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <p
+          style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0b6e6a">
+          New report</p>
+        <h2
+          style="font-family:Carlito, Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.1; color:#1c3144">
+          Compliance Trend shows each department month by month</h2>
+        <div
+          style="width:128px; height:8px; display:flex; flex-direction:column; background:#e8883a; border-radius:2px">
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:row; gap:32px; flex:1">
+        <div style="display:flex; flex-direction:column; gap:12px; flex:0 0 640px">
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; line-height:1.3; color:#1c3144"><span
+              style="color:#0b6e6a"><b>1</b></span>&nbsp;&nbsp;Pick departments and a period</p>
+          <div
+            style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; padding:16px; background:#eef2f4; border-radius:12px">
+            <img src="img/trend-criteria.png"
+              alt="Compliance Trend Report criteria with two departments, all achievement types, the period set to past 24 months, profiles that require compliance, and a note that monthly figures will not match the Compliance Summary exactly"
+              style="width:600px; height:383px; border:1px solid #d5dde2; border-radius:8px; object-fit:contain; box-shadow:0 4px 12px #1c31441a">
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; flex:1">
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; line-height:1.3; color:#1c3144"><span
+              style="color:#0b6e6a"><b>2</b></span>&nbsp;&nbsp;One chart and one score table per department</p>
+          <div
+            style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; padding:16px; background:#eef2f4; border-radius:12px">
+            <img src="img/trend-report.png"
+              alt="Alberta Diluent Terminal on the Report tab: a line chart of monthly compliance score per compliance item from October 2024 to September 2026, above a table of the monthly scores"
+              style="width:720px; height:430px; border:1px solid #d5dde2; border-radius:8px; object-fit:contain; box-shadow:0 4px 12px #1c31441a">
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:row; gap:24px">
+        <div
+          style="display:flex; flex-direction:column; gap:6px; flex:1; padding:20px 24px; background:#ddf1ee; border-radius:12px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:26px; font-weight:700; line-height:1.2; color:#1c3144">
+            Up to 20 departments</p>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:24px; line-height:1.35; color:#2e3d4c">The same
+            limit
+            as the Compliance Summary</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:6px; flex:1; padding:20px 24px; background:#f1f4f5; border-radius:12px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:26px; font-weight:700; line-height:1.2; color:#1c3144">
+            12 or 24 months</p>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:24px; line-height:1.35; color:#2e3d4c">One point
+            per
+            month, ending with the current month</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:6px; flex:1; padding:20px 24px; background:#ddf1ee; border-radius:12px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:26px; font-weight:700; line-height:1.2; color:#1c3144">
+            Clear when empty</p>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:24px; line-height:1.35; color:#2e3d4c">A
+            department
+            with no requirements says so instead of drawing a flat line</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:6px; flex:1; padding:20px 24px; background:#f1f4f5; border-radius:12px">
+          <p
+            style="font-family:Carlito, Arial, sans-serif; font-size:26px; font-weight:700; line-height:1.2; color:#1c3144">
+            In the Reports list</p>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:24px; line-height:1.35; color:#2e3d4c">Right below
+            the Compliance Summary</p>
+        </div>
+      </div>
+      <aside>This is the new Compliance Trend report. You'll find it in the Reports list, right below the Compliance
+        Summary. The criteria are short: choose your departments, up to 20, the same limit as the summary report. Choose
+        the achievement types, and a period of either the past 12 months or the past 24 months. Then choose whether to
+        count profiles that require compliance, or only primary profiles. The report shows one block for each
+        department: a line chart of the compliance score, one point per month, with a table of the monthly scores
+        underneath. If a department had no compliance requirements during the period, the report says so, rather than
+        drawing an empty chart. The old history options compared a few dates side by side. This gives you up to two
+        years at a glance, which makes it much easier to see whether a department is improving or slipping.</aside>
+    </section>
+    <section class="slide" id="export" data-transition="fade"
+      style="background:#FEFEFD; color:#1C3144; font-family:'Carlito', Arial, sans-serif; padding:88px 128px 96px; display:flex; flex-direction:column; gap:40px">
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <p style="font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0B6E6A">Sharing
+          the trend</p>
+        <h2 style="font-size:64px; font-weight:700; line-height:1.1; color:#1C3144">Download it as a workbook or a PDF
+        </h2>
+        <div style="width:128px; height:8px; background:#E8883A; border-radius:2px"></div>
+      </div>
+      <div style="flex:1; display:flex; gap:32px">
+        <div style="flex:0 0 1032px; display:flex; flex-direction:column; gap:12px">
+          <p style="font-size:28px; line-height:1.3; color:#1C3144"><span
+              style="color:#0B6E6A"><b>1</b></span>&#160;&#160;The XLSX has one worksheet per department, with its chart
+          </p>
+          <div
+            style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#EEF2F4; border-radius:12px; padding:16px">
+            <img src="img/trend-xlsx.png"
+              alt="The downloaded workbook open in Excel on the Alberta Diluent Terminal worksheet: the monthly score table above its line chart, with tabs for Alberta Diluent Terminal, Orientation and Turnaround Support along the bottom"
+              style="width:1000px; height:530px; object-fit:contain; border-radius:8px; border:1px solid #D5DDE2; box-shadow:0 4px 12px rgba(28,49,68,0.10)">
+          </div>
+        </div>
+        <div
+          style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:28px; background:#1C3144; border-radius:16px; padding:36px">
+          <p style="font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#8FD3CC">Two
+            formats</p>
+          <div style="display:flex; flex-direction:column; gap:4px">
+            <p style="font-size:30px; font-weight:700; line-height:1.2; color:#F4F7F9">Download XLSX</p>
+            <p style="font-size:26px; line-height:1.35; color:#C9D6E0">From the criteria or the report, for your own
+              analysis</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px">
+            <p style="font-size:30px; font-weight:700; line-height:1.2; color:#F4F7F9">Download PDF</p>
+            <p style="font-size:26px; line-height:1.35; color:#C9D6E0">Landscape pages with the charts as you see them,
+              ready to send</p>
+          </div>
+        </div>
+      </div>
+      <aside>You can take the trend with you in two formats. Download XLSX gives you an Excel workbook with one
+        worksheet
+        for each department. Each worksheet has the monthly scores and its own line chart, so you can filter, add your
+        own notes, or copy a chart straight into a presentation. You can download it from the criteria tab without
+        running the report first, or from the report tab after. Download PDF gives you the report as you see it on
+        screen, in landscape, with the charts included, which is handy for sending to someone who doesn't sign in to
+        CMDS. As on the screen, a department with no requirements gets a short note rather than an empty chart, in both
+        the workbook and the PDF.</aside>
+    </section>
+    <section class="slide" id="know" data-transition="fade"
+      style="display:flex; flex-direction:column; gap:40px; padding:88px 128px 96px; background:#fefefd">
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <p
+          style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0b6e6a">
+          Good to know</p>
+        <h2
+          style="font-family:Carlito, Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.1; color:#1c3144">
+          How the two reports differ</h2>
+        <div
+          style="width:128px; height:8px; display:flex; flex-direction:column; background:#e8883a; border-radius:2px">
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:row; gap:32px">
+        <div
+          style="display:flex; flex-direction:column; gap:12px; flex:1; padding:36px; background:#ddf1ee; border-radius:16px">
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:36px; font-weight:700; color:#0b6e6a">1</p>
+          <h3
+            style="font-family:Carlito, Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.2; color:#1c3144">
+            Live versus monthly</h3>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; line-height:1.35; color:#2e3d4c">The summary
+            is calculated live. The trend reads a snapshot taken each week, keeping the last one in each month.</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:12px; flex:1; padding:36px; background:#ddf1ee; border-radius:16px">
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:36px; font-weight:700; color:#0b6e6a">2</p>
+          <h3
+            style="font-family:Carlito, Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.2; color:#1c3144">
+            Close, not identical</h3>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; line-height:1.35; color:#2e3d4c">The
+            snapshot
+            counts department employment only, and primary or compliance profiles, so the latest month won't match the
+            summary exactly.</p>
+        </div>
+        <div
+          style="display:flex; flex-direction:column; gap:12px; flex:1; padding:36px; background:#ddf1ee; border-radius:16px">
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:36px; font-weight:700; color:#0b6e6a">3</p>
+          <h3
+            style="font-family:Carlito, Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.2; color:#1c3144">
+            Your departments only</h3>
+          <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; line-height:1.35; color:#2e3d4c">Both
+            reports
+            list only the departments your account can access, exactly as the summary does today.</p>
+        </div>
+      </div>
+      <div style="flex:1"></div>
+      <div
+        style="display:flex; flex-direction:column; gap:10px; padding:28px 36px; background:#fbe8da; border-left:8px solid #e8883a; border-radius:12px">
+        <p
+          style="font-family:Carlito, Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#1c3144">
+          History is kept for 24 months</p>
+        <p style="font-family:Carlito, Arial, sans-serif; font-size:28px; line-height:1.4; color:#1c3144">After October
+          8,
+          CMDS keeps one department compliance snapshot per month for the past 24 months. Older snapshots are removed.
+          If you need
+          figures from before November 2024, export them before the release.</p>
+      </div>
+      <aside>A few things worth knowing about how the two reports relate. First, the Compliance Summary is live, but the
+        trend isn't, and can't be, because it's looking backwards. CMDS still takes a compliance snapshot every week,
+        and the trend report reads the last snapshot in each month. Second, because of that, the two reports are close
+        but not identical. The snapshot counts department employment only, not organization employment or data access,
+        and it covers primary profiles and profiles that require compliance, not all profiles. So don't be surprised if
+        the latest month on the trend is a point or two off the summary. The criteria page says this too. Third, both
+        reports only list the departments your account can access, which is the same rule the summary uses today. If a
+        department is missing from the list, check your access before assuming it's the report. And finally, the
+        important one. From October 8, CMDS keeps one snapshot per month for the past 24 months, and removes the rest.
+        Up to now it kept every weekly snapshot going back several years. If anyone relies on compliance figures from
+        before November 2024, please export them before the release, and let us know if that's a problem.</aside>
+    </section>
+    <section class="slide" id="questions" data-transition="fade"
+      style="display:flex; flex-direction:column; gap:32px; justify-content:center; padding:128px; background:#1c3144">
+      <p
+        style="font-family:Carlito, Arial, sans-serif; font-size:28px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#8fd3cc">
+        Over to you</p>
+      <h1
+        style="font-family:Carlito, Arial, sans-serif; font-size:120px; font-weight:700; line-height:1.05; color:#f4f7f9">
+        Questions and feedback</h1>
+      <div style="width:160px; height:10px; display:flex; flex-direction:column; background:#e8883a; border-radius:2px">
+      </div>
+      <p style="font-family:Carlito, Arial, sans-serif; font-size:44px; line-height:1.3; color:#c9d6e0">If time permits
+        we can run both reports in the test environment</p>
+      <aside>Likely questions, with short answers. Where did the Report Type option go? Current compliance is now the
+        only type on the Compliance Summary. The two history types are replaced by the Compliance Trend report. Why does
+        the trend not match the summary exactly? The trend reads monthly snapshots that count department employment
+        only, while the summary is live and uses whatever membership and profile options you pick. Can the trend show
+        all profiles? No. The snapshot only holds primary profiles and profiles that require compliance. Can it go back
+        further than 24 months? No. From October 8, CMDS keeps 24 months of monthly snapshots and removes older ones.
+        Why did the department count change? It used to count every membership record, including archived people and
+        duplicates. It now counts the people the report actually shows. Is the summary still available as a download?
+        Yes, the downloads work as before.</aside>
+    </section>
+    <section class="slide" id="demo" data-transition="fade"
+      style="background:#FEFEFD; color:#1C3144; font-family:'Carlito', Arial, sans-serif; padding:88px 128px 96px; display:flex; flex-direction:column; gap:40px">
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <p style="font-size:24px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0B6E6A">If time
+          permits</p>
+        <h2 style="font-size:64px; font-weight:700; line-height:1.1; color:#1C3144">A two-minute walkthrough</h2>
+        <div style="width:128px; height:8px; background:#E8883A; border-radius:2px"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; align-items:center; gap:28px; background:#DDF1EE; border-radius:12px; padding:32px">
+          <p style="flex:0 0 40px; font-size:36px; font-weight:700; color:#0B6E6A">1</p>
+          <p style="flex:0 0 460px; font-size:32px; font-weight:700; color:#1C3144">Compliance Summary</p>
+          <p style="flex:1; font-size:30px; line-height:1.35; color:#2E3D4C">Reports list, pick one large department,
+            run the report, and point out the count beside the department</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:28px; background:#F1F4F5; border-radius:12px; padding:32px">
+          <p style="flex:0 0 40px; font-size:36px; font-weight:700; color:#0B6E6A">2</p>
+          <p style="flex:0 0 460px; font-size:32px; font-weight:700; color:#1C3144">Compliance Trend</p>
+          <p style="flex:1; font-size:30px; line-height:1.35; color:#2E3D4C">Same departments, past 24 months, run the
+            report, and hover a point on the chart</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:28px; background:#DDF1EE; border-radius:12px; padding:32px">
+          <p style="flex:0 0 40px; font-size:36px; font-weight:700; color:#0B6E6A">3</p>
+          <p style="flex:0 0 460px; font-size:32px; font-weight:700; color:#1C3144">Downloads</p>
+          <p style="flex:1; font-size:30px; line-height:1.35; color:#2E3D4C">Download XLSX and open a department's
+            worksheet, then Download PDF</p>
+        </div>
+      </div>
+      <aside>Before the meeting: sign in to the test environment as an administrator who can access every department,
+        not a field administrator, so the department list isn't limited. Pick three or four departments in advance,
+        including one large one such as Orientation, and check that each has trend data. For the walkthrough itself:
+        open the Reports list and click Compliance Summary. Select the departments, run the report, and point out the
+        count beside each department and how quickly it came back. Go back to the Reports list and open Compliance
+        Trend.
+        Select the same departments, choose the past 24 months, run the report, and hover over a point on one of the
+        charts to show the monthly score. Finally, click Download XLSX and open one department's worksheet in Excel,
+        then
+        click Download PDF and show the landscape pages.</aside>
+    </section>
+  </main>
+  <div id="notes" hidden></div>
+  <div id="viewer" hidden><img alt=""></div>
+  <nav id="toolbar" aria-label="Slide controls">
+    <button type="button" id="prev">Previous</button>
+    <span id="counter"></span>
+    <button type="button" id="next">Next</button>
+    <button type="button" id="toggle-notes">Notes</button>
+    <button type="button" id="toggle-full">Full screen</button>
+  </nav>
+  <script src="deck.js"></script>
+</body>
+
+</html>
